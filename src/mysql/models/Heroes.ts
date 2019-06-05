@@ -23,7 +23,7 @@ Hero.init({
     }
 }, {
     sequelize: sequelize,
-    tableName: 'Heroes'
+    tableName: 'heroes'
 });
 
 

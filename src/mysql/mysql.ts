@@ -18,8 +18,25 @@ export default class Mysql {
         this.dbConnection();
     }
 
-    public static get getInstance() {
+    public static get instance() {
+        // console.log('Creacion de instancia')
         return this._instance || (this._instance = new this())
+    }
+
+    static queryExecute ( query: string, callback: Function) {
+        this.instance.connection.query(query, (error: any, results: Object[], fields: any) =>{
+            if (error) {
+                console.log('error en el query', error);
+                return callback( error );
+            } else {
+                if (results.length == 0) {
+                    callback('El registro no existe ')
+                } else {
+                    callback( null, results )
+                }
+
+            }
+        })
     }
 
     private dbConnection () {
